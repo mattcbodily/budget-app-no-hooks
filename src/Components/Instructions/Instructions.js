@@ -10,15 +10,15 @@ class Instructions extends Component {
     }
 
     decrementStep = () => {
-        this.setState({
-            step: this.state.step -= 1
-        })
+        this.setState(prevState => ({
+            step: prevState.step - 1
+        }))
     }
 
     incrementStep = () => {
-        this.setState({
-            step: this.state.step += 1
-        })
+        this.setState(prevState => ({
+            step: prevState.step + 1
+        }))
     }
 
     showStep = () => {

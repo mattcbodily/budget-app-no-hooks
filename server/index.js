@@ -3,6 +3,7 @@ const express = require('express');
 const {json} = require('body-parser');
 const massive = require('massive');
 const session = require('express-session');
+const main = require('./controllers/mainController');
 const auth = require('./controllers/authController');
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
@@ -24,6 +25,9 @@ app.post('/auth/register', auth.register);
 app.post('/auth/login', auth.login);
 app.post('/auth/logout', auth.logout);
 app.get('/auth/session-user', auth.getSessionUser);
+
+//main endpoints
+app.post('/api/monthly-budget', main.addMonthlyBudget);
 
 const port = SERVER_PORT || 5100;
 app.listen(port, () => console.log(`Budgeting the things on ${port}`))
