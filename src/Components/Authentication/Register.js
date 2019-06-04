@@ -26,7 +26,7 @@ class Register extends Component {
         } else {
             axios.post('/auth/register', {email, username, password})
             .then(res => {
-                this.props.history.push('/')
+                this.props.history.push('/instructions')
         })}
     }
 

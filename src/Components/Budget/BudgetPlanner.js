@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-class Budget extends Component {
+class BudgetPlanner extends Component {
     render(){
         return(
             <div>
-
+                Budget Planner Component
             </div>
         )
     }
 }
 
-export default React;
+export default BudgetPlanner;

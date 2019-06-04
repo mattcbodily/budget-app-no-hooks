@@ -20,7 +20,7 @@ class Login extends Component {
         const {email, password} = this.state;
         axios.post('/auth/login', {email, password})
         .then(res => {
-            this.props.history.push('/')
+            this.props.history.push('/budget')
         })
     }
 
