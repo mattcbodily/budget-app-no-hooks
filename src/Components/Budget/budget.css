@@ -2,3 +2,9 @@
     height: 250px;
     width: 250px;
 }
+
+.expense-modal {
+    height: 300px;
+    width: 300px;
+    background-color: slategray;
+}

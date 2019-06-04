@@ -1,4 +1,4 @@
-button {
+/* button {
     height: 45px;
     width: 85%;
     background-image:linear-gradient(to right, #8AC1FF, #0078FF);
@@ -7,12 +7,4 @@ button {
     border: none;
     margin-bottom: 10px;
     border-radius: 30px;
-    box-shadow: 2px 2px whitesmoke;
-}
-
-/* .login-button {
-    background-image: none;
-    background-color: white;
-    color: black;
-    border: 1px solid whitesmoke;
 } */

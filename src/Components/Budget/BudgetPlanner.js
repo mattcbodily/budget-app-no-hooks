@@ -122,7 +122,6 @@ class BudgetPlanner extends Component {
     }
 
     render(){
-        console.log(this.state.user)
         const {groceries, gas, entertainment, restaurants, other} = this.state;
         return(
             <div>

@@ -27,7 +27,9 @@ app.post('/auth/logout', auth.logout);
 app.get('/auth/session-user', auth.getSessionUser);
 
 //main endpoints
-app.post('/api/monthly-budget', main.addMonthlyBudget);
+app.get('/api/monthly-budget/:id', main.getUserBudget); //found in the BudgetProgress component, takes the user id
+app.post('/api/monthly-budget', main.addMonthlyBudget); //found in the BudgetPlanner component
+app.post('/api/expense', main.addExpense); //found in the ExpenseModal component
 
 const port = SERVER_PORT || 5100;
 app.listen(port, () => console.log(`Budgeting the things on ${port}`))
