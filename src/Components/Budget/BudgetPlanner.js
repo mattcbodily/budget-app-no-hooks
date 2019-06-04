@@ -54,9 +54,19 @@ class BudgetPlanner extends Component {
         let mm = today.getMonth()+1;
         let yyyy = today.getFullYear();
         today = mm + '/' + yyyy;
-        axios.post('/api/monthly-budget', {user_id: this.state.user.user_id, budget: parseInt(this.state.budget), date: today})
+        let monthlyBudget = {
+            user_id: this.state.user.user_id,
+            budget: parseInt(this.state.budget),
+            groceries: parseInt(this.state.groceries),
+            gas: parseInt(this.state.gas),
+            entertainment: parseInt(this.state.entertainment),
+            restaurants: parseInt(this.state.restaurants),
+            other: parseInt(this.state.other),
+            date: today
+        }
+        axios.post('/api/monthly-budget', monthlyBudget)
         .then(res => {
-            this.incrementStep()
+            alert('it worked, probably')
         })
     }
 
@@ -69,7 +79,7 @@ class BudgetPlanner extends Component {
                         <input 
                             value={this.state.budget}
                             onChange={e => this.handleInput('budget', e.target.value)}/>
-                        <button onClick={this.addMonthlyBudget}>Submit</button>
+                        <button onClick={this.incrementStep}>Submit</button>
                     </div>
                 )
             case 2:
@@ -103,7 +113,7 @@ class BudgetPlanner extends Component {
                             value={this.state.other}
                             maxLength='20'
                             onChange={e => this.handleInput('other', e.target.value)}/>
-                        <Link to='budget'><button>Submit</button></Link>
+                        <Link to='budget'><button onClick={this.addMonthlyBudget}>Submit</button></Link>
                     </div>
                 )
             default:
