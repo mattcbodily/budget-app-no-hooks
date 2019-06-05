@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import ExpenseModal from './ExpenseModal';
-// import {HorizonalBar} from 'react-chartjs-2';
+import {Doughnut} from 'react-chartjs-2';
 
 class BudgetProgress extends Component {
     constructor(){
@@ -37,14 +37,14 @@ class BudgetProgress extends Component {
         await axios.get(`/api/monthly-budget/${this.state.user.user_id}`)
         .then(res => {
             this.setState({
-                budget: res.data
+                budget: res.data[0]
             })
         })
         this.handleGetUserExpenses();
     }
 
     handleGetUserExpenses = async() => {
-        await axios.get(`/api/expenses/${this.state.budget[0].budget_id}`)
+        await axios.get(`/api/expenses/${this.state.budget.budget_id}`)
         .then(res => {
             this.setState({
                 expenses: res.data
@@ -76,6 +76,9 @@ class BudgetProgress extends Component {
     }
 
     render(){
+        const {budget, groceriesTotal, gasTotal, entertainmentTotal, restaurantsTotal, otherTotal} = this.state;
+        const totalExpenses = (groceriesTotal + gasTotal + entertainmentTotal + restaurantsTotal + otherTotal);
+        const budgetRemaining = (budget.budget - groceriesTotal - gasTotal - entertainmentTotal - restaurantsTotal - otherTotal);
         return (
             <div>
                 <button onClick={this.handleModalToggle}>Add Expense</button>
@@ -85,6 +88,26 @@ class BudgetProgress extends Component {
                         toggle={this.handleModalToggle}
                         expenses={this.handleGetUserExpenses}/>
                 : null}
+                <div>
+                    <Doughnut 
+                        data={{
+                            labels: ['Remaining', 'Spent'],
+                            datasets: [{
+                                label: 'Groceries',
+                                backgroundColor: ['#FF4242', '#FFAAAA'],
+                                data: [budgetRemaining, totalExpenses]
+                            }]
+                    }}/>
+                    <Doughnut 
+                        data={{
+                            labels: ['Remaining', 'Spent'],
+                            datasets: [{
+                                label: 'Groceries',
+                                backgroundColor: ['#FF4242', '#FFAAAA'],
+                                data: [(budget.groceries - groceriesTotal), groceriesTotal]
+                            }]
+                        }}/>
+                </div>
             </div>
         )
     }

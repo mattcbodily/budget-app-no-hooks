@@ -66,7 +66,7 @@ class BudgetPlanner extends Component {
         }
         axios.post('/api/monthly-budget', monthlyBudget)
         .then(res => {
-            alert('it worked, probably')
+
         })
     }
 
@@ -122,7 +122,8 @@ class BudgetPlanner extends Component {
     }
 
     render(){
-        const {groceries, gas, entertainment, restaurants, other} = this.state;
+        const {budget, groceries, gas, entertainment, restaurants, other} = this.state;
+        const budgetRemaining = (budget - groceries - gas - entertainment - restaurants - other);
         return(
             <div>
                 <h3>Plan your Budget</h3>
@@ -130,12 +131,12 @@ class BudgetPlanner extends Component {
                     <Doughnut
                         height={300}
                         width={300} 
-                        data={{labels: ['Groceries', 'Gas', 'Entertainment', 'Restaurants', 'Other'],
+                        data={{labels: ['Remaining Budget', 'Groceries', 'Gas', 'Entertainment', 'Restaurants', 'Other'],
                                datasets: [{
                                  label: 'Budget Dataset',
-                                 backgroundColor: ['#FF4242', '#49D4D6', '#8749D6', '#FFC264', '#2CDE00'],
+                                 backgroundColor: ['#616161', '#FF4242', '#49D4D6', '#8749D6', '#FFC264', '#2CDE00'],
                                  borderColor: '#000000',
-                                 data: [parseInt(groceries), parseInt(gas), parseInt(entertainment), parseInt(restaurants), parseInt(other)]
+                                 data: [parseInt(budgetRemaining), parseInt(groceries), parseInt(gas), parseInt(entertainment), parseInt(restaurants), parseInt(other)]
                             }]
                         }}
                         options={{

@@ -20,7 +20,7 @@ class ExpenseModal extends Component {
         today = mm + '/' + dd + '/' + yyyy;
 
         let expenseObj = {
-            budget_id: this.props.budget[0].budget_id,
+            budget_id: this.props.budget.budget_id,
             expense_name: this.state.expenseName,
             category: this.state.category,
             amount: parseInt(this.state.expenseAmount),
