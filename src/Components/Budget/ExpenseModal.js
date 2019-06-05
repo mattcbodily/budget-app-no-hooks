@@ -14,9 +14,10 @@ class ExpenseModal extends Component {
 
     handleAddExpense = () => {
         let today = new Date();
+        let dd = today.getDate();
         let mm = today.getMonth()+1;
         let yyyy = today.getFullYear();
-        today = mm + '/' + yyyy;
+        today = mm + '/' + dd + '/' + yyyy;
 
         let expenseObj = {
             budget_id: this.props.budget[0].budget_id,
@@ -25,10 +26,10 @@ class ExpenseModal extends Component {
             amount: parseInt(this.state.expenseAmount),
             date: today
         }
-        console.log(expenseObj)
         axios.post('/api/expense', expenseObj)
         .then(res => {
-            this.props.toggle()
+            this.props.expenses();
+            this.props.toggle();
             // function that will grab all expenses will run here
         })
     }
